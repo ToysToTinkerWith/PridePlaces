@@ -7,22 +7,16 @@ export default function Home({ posts, users }) {
   const [displayPost, setDisplayPost] = useState(null)
 
   const lookUpUser = (post) => {
-    
     users.forEach((user) => {
-
       if (user.id === post.userId) {
-
         let result = {
           ...user,
           ...post, //post.id overwrites user.id
         }
-        
-
         setDisplayPost(result)   
         return
       }
     })
-
   } 
 
   const pageStyle = {
@@ -86,6 +80,7 @@ export default function Home({ posts, users }) {
       :
         null
       }
+      
     </div>
   )
 }
