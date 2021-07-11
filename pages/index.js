@@ -14,8 +14,9 @@ export default function Home({ posts, users }) {
 
         let result = {
           ...user,
-          ...post,
+          ...post, //post.id overwrites user.id
         }
+        
 
         setDisplayPost(result)   
         return
@@ -30,62 +31,61 @@ export default function Home({ posts, users }) {
 
   return (
     <div style={pageStyle}>
+
       <Typography variant="h2" align="center"> Posts</Typography>
       <hr />
       {posts.length > 0 ? 
-      posts.map((post) => {
-        return (
-          <div key={post.id}>
-            <Button 
-            variant="contained" 
-            style={{backgroundColor: "#F0F8FF", margin: 5}}
-            onClick={() => lookUpUser(post)}
-            > 
-            {post.title} 
-            </Button>
-          </div>
-        )
-      })
+        posts.map((post) => {
+          return (
+            <div key={post.id}>
+              <Button 
+              variant="contained" 
+              style={{backgroundColor: "#F0F8FF", margin: 5}}
+              onClick={() => lookUpUser(post)}
+              > 
+              {post.title} 
+              </Button>
+            </div>
+          )
+        })
       :
-      null
+        null
       }
+
       {displayPost ? 
-      <Modal 
-      open={true} 
-      disableEnforceFocus
-      onClose={() => setDisplayPost(null)}
-      style={{
-        margin: 75,
-        overflowY: "auto",
-        overflowX: "hidden"
-      }}>
-      <div 
-      style={{
-        backgroundColor: "#FFFFFF",
-        borderRadius: 15,
-        padding: 10
-      }}>
-        <Button variant="contained" onClick={() => setDisplayPost(null)}> Close </Button>
+        <Modal 
+          open={true} 
+          disableEnforceFocus
+          onClose={() => setDisplayPost(null)}
+          style={{
+            margin: 75,
+            overflowY: "auto",
+            overflowX: "hidden"
+          }}>
+          <div 
+            style={{
+              backgroundColor: "#FFFFFF",
+              borderRadius: 15,
+              padding: 10
+            }}>
+            <Button variant="contained" onClick={() => setDisplayPost(null)}> Close </Button>
 
-        <Typography variant="h3" align="center"> Author Name: </Typography>
-        <Typography variant="h4" align="center"> {displayPost.name} </Typography>
-        <hr />
-        <Typography variant="h3" align="center"> CatchPhrase </Typography>
-        <Typography variant="h4" align="center"> {displayPost.company.catchPhrase} </Typography>
-        <hr />
-        <Typography variant="h3" align="center"> Post Title: </Typography>
-        <Typography variant="h4" align="center"> {displayPost.title} </Typography>
-        <hr />
-        <Typography variant="h3" align="center"> Post Body: </Typography>
-        <Typography variant="h4" align="center"> {displayPost.body} </Typography>
-        
-
-      </div>
-      </Modal>
+            <Typography variant="h3" align="center"> Author Name: </Typography>
+            <Typography variant="h4" align="center"> {displayPost.name} </Typography>
+            <hr />
+            <Typography variant="h3" align="center"> CatchPhrase </Typography>
+            <Typography variant="h4" align="center"> {displayPost.company.catchPhrase} </Typography>
+            <hr />
+            <Typography variant="h3" align="center"> Post Title: </Typography>
+            <Typography variant="h4" align="center"> {displayPost.title} </Typography>
+            <hr />
+            <Typography variant="h3" align="center"> Post Body: </Typography>
+            <Typography variant="h4" align="center"> {displayPost.body} </Typography>
+          </div>
+        </Modal>
       :
-      null
+        null
       }
-
     </div>
   )
 }
